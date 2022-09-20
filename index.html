@@ -1,0 +1,42 @@
+<!DOCTYPE <HTML>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="description" content="画面にランダムな色を表示します。">
+		<title>色をランダムに表示</title>
+		<style>
+			* {
+				margin: 0;
+				user-select: none;
+			}
+			#colorPanel {
+				display: flex;
+				flex-direction: column;
+				width: 100vw;
+				height: 100vh;
+				justify-content: center;
+				align-items: center;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="colorPanel" onclick="changeColor();">
+			<p>タッチすると色が変わります</p>
+			<p><input id="fixedBrightness" type="checkbox"> 明度を揃える</p>
+		</div>
+		<script src="colors.js"></script>
+		<script>
+			const colorPanel = document.getElementById("colorPanel");
+			var currentColor = 'white';
+			var fixedBrightness = document.getElementById("fixedBrightness");
+			function changeColor() {
+				let newColor;
+				do {
+					newColor = ((fixedBrightness.checked && colorsSameBrightness) || colors)[Math.floor(Math.random() * colors.length)];
+				} while (newColor == currentColor);
+				currentColor = newColor;
+				colorPanel.style.backgroundColor = currentColor;
+				console.log(currentColor);
+			}
+		</script>
+	</body>
+</HTML>
